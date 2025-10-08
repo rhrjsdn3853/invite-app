@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <header class="hero-block">
+    <h1 class="title">{{ event.title }}</h1>
+    <p class="subtitle">주최 · {{ event.host }}</p>
+
+    <div class="kv">
+      <div class="i">📅</div><div>{{ event.date_text }}</div>
+      <div class="i">📍</div><div>{{ event.place }}</div>
+    </div>
+
+    <div class="div"></div>
+
+    <p class="desc">{{ event.desc }}</p>
+
+    <div class="countdown" id="countdown">
+      <div class="cd"><span class="cd-val" id="d">00</span><span class="cd-lab">일</span></div>
+      <div class="cd"><span class="cd-val" id="h">00</span><span class="cd-lab">시간</span></div>
+      <div class="cd"><span class="cd-val" id="m">00</span><span class="cd-lab">분</span></div>
+      <div class="cd"><span class="cd-val" id="s">00</span><span class="cd-lab">초</span></div>
+    </div>
+
+    <nav class="actions">
+      <a class="btn primary" href="/event.ics" download>캘린더에 추가</a>
+      <a class="btn" href="https://www.google.com/maps/search/{{ event.place | urlencode }}" target="_blank" rel="noopener">길찾기</a>
+    </nav>
+  </header>
+
+  <!-- 스크롤 후 펼쳐질 편지 -->
+  <section class="letter-block" id="letterBlock">
+    <div class="letter-card">
+      <div class="letter-title">Letter from Host</div>
+      <div class="hairline"></div>
+
+      <div class="letter-body" id="letterBody">
+        {% set lines = (event.letter or '').split('\n') %}
+        {% for line in lines if line.strip() %}
+          <p class="line">{{ line }}</p>
+        {% endfor %}
+        <p style="margin:.8rem 0 0; color:var(--sub); font-weight:600; text-align:right">— 등마루 가족 일동 —</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // 카운트다운 (KST)
+    const target = new Date("2025-10-22T10:00:00+09:00").getTime();
+    const $ = id => document.getElementById(id);
+    setInterval(()=>{
+      const t = target - Date.now(); if(t<=0) return;
+      const dd=Math.floor(t/86400000);
+      const hh=Math.floor((t%86400000)/3600000);
+      const mm=Math.floor((t%3600000)/60000);
+      const ss=Math.floor((t%60000)/1000);
+      $("d").textContent=String(dd).padStart(2,"0");
+      $("h").textContent=String(hh).padStart(2,"0");
+      $("m").textContent=String(mm).padStart(2,"0");
+      $("s").textContent=String(ss).padStart(2,"0");
+    },1000);
+  </script>
+
+{% endblock %}
