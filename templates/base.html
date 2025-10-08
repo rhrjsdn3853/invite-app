@@ -4,24 +4,24 @@
 <meta charset="utf-8" />
 <title>{{ event.title }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
 <style>
   :root{
     /* 색상 대비 + Apple 감성 */
     --bg1:#f5f6f8; --bg2:#e8ecf2;
     --paper:#ffffff;
-    --ink:#1a1a1a;      /* 본문 글씨 - 진하게 */
-    --sub:#555;         /* 보조 텍스트 - 짙은 회색 */
+    --ink:#1a1a1a;      /* 본문 글씨 */
+    --sub:#555;         /* 보조 텍스트 */
     --line:#e5e5ea;
-    --pri:#007aff;      /* Apple 블루 */
-    --pri2:#00c896;
-    --radius:28px; 
+    --pri:#007aff; --pri2:#00c896;
+    --radius:28px;
     --shadow:0 12px 32px rgba(0,0,0,.08);
   }
   @media(prefers-color-scheme:dark){
     :root{
       --bg1:#0d0f12; --bg2:#050607;
-      --paper:#111214;
-      --ink:#f5f5f7;
+      --paper:#111214;        /* 다크에선 어두운 종이색 */
+      --ink:#f5f5f7;          /* 밝은 글씨 */
       --sub:#bdbdc2;
       --line:#2c2c2e;
       --shadow:0 12px 36px rgba(0,0,0,.5);
@@ -47,7 +47,7 @@
 
   .card{
     width:min(780px,96vw);
-    background:var(--paper);
+    background:var(--paper);          /* 변수 사용 */
     border:1px solid var(--line);
     border-radius:var(--radius);
     box-shadow:var(--shadow);
@@ -92,14 +92,14 @@
     display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:.4rem 0 1.1rem;
   }
   .cd{
-    background:#fff;
+    background:var(--paper);          /* 변수 사용 */
     border:1px solid var(--line);
     border-radius:12px;
     padding:12px 14px;
     min-width:76px;
     text-align:center;
   }
-  .cd-val{ display:block; font-weight:800; font-size:1.6rem; color:#111 }
+  .cd-val{ display:block; font-weight:800; font-size:1.6rem; color:var(--ink) }  /* 변수 사용 */
   .cd-lab{ display:block; font-size:.86rem; color:var(--sub) }
 
   .actions{
@@ -114,8 +114,8 @@
     border-radius:12px;
     transition:.2s;
     border:1px solid var(--line);
-    background:#f9f9fb;
-    color:#1a1a1a;
+    background:var(--paper);          /* 변수 사용 */
+    color:var(--ink);                 /* 변수 사용 */
     box-shadow:0 2px 6px rgba(0,0,0,.05);
   }
   .btn.primary{
@@ -142,7 +142,7 @@
   }
 
   .letter-card{
-    background:#fff;
+    background:var(--paper);          /* 변수 사용 */
     border:1px solid var(--line);
     border-radius:16px;
     box-shadow:0 10px 28px rgba(0,0,0,.04);
@@ -167,7 +167,7 @@
   .letter-body{
     font-size:1.06rem;
     line-height:1.9;
-    color:var(--ink);
+    color:var(--ink);                 /* 변수 사용 */
   }
   .letter-body p{margin:0 0 .9rem;}
   .letter-body p:last-of-type{color:var(--sub);}
